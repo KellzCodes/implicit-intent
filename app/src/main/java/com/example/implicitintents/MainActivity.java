@@ -39,6 +39,19 @@ public class MainActivity extends AppCompatActivity {
         shareText(text);
     }
 
+    public void onClickMakeCallButton(View v){
+        String phoneNumber = "tel:2296711027";
+        makeCall(phoneNumber);
+    }
+
+    private void makeCall(String phoneNumber) {
+        Uri number = Uri.parse(phoneNumber);
+        Intent intent = new Intent(Intent.ACTION_DIAL, number);
+        if (intent.resolveActivity(getPackageManager()) != null){
+            startActivity(intent);
+        }
+    }
+
     private void shareText(String text){
         /*
          * You can think of MIME types similarly to file extensions. They aren't the exact same,
