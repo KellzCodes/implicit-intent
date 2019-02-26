@@ -2,6 +2,7 @@ package com.example.implicitintents;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.support.v4.app.ShareCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -28,6 +29,38 @@ public class MainActivity extends AppCompatActivity {
                 .appendQueryParameter("q", address);
         Uri addressUri = builder.build();
         openMap(addressUri);
+    }
+
+    public void onClickShareTextButton(View v){
+        String text =
+                "Day 33 of #100DaysOfCode: I am playing around with implicit intents " +
+                        "for #AndroidDev";
+
+        shareText(text);
+    }
+
+    private void shareText(String text){
+        /*
+         * You can think of MIME types similarly to file extensions. They aren't the exact same,
+         * but MIME types help a computer determine which applications can open which content. For
+         * example, if you double click on a .pdf file, you will be presented with a list of
+         * programs that can open PDFs. Specifying the MIME type as text/plain has a similar affect
+         * on our implicit Intent. With text/plain specified, all apps that can handle text content
+         * in some way will be offered when we call startActivity on this particular Intent.
+         */
+        String mimeType = "text/plain";
+
+        // Title of the window that will pop up
+        String chooserTitle = "Sharing is caring";
+
+        /* ShareCompat.IntentBuilder provides a fluent API for creating Intents */
+        ShareCompat.IntentBuilder
+                // The context from which the share is coming from
+                .from(this)
+                .setType(mimeType)
+                .setChooserTitle(chooserTitle)
+                .setText(text)
+                .startChooser();
     }
 
     private void openMap(Uri location){
