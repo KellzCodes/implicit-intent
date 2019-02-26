@@ -19,6 +19,25 @@ public class MainActivity extends AppCompatActivity {
         openWebsite(url);
     }
 
+    public void onClickOpenMapLocationButton(View v){
+        String address = "85 10th Ave, New York, NY 10011";
+
+        Uri.Builder builder = new Uri.Builder();
+        builder.scheme("geo")
+                .path("0,0")
+                .appendQueryParameter("q", address);
+        Uri addressUri = builder.build();
+        openMap(addressUri);
+    }
+
+    private void openMap(Uri location){
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setData(location);
+        if (intent.resolveActivity(getPackageManager()) != null){
+            startActivity(intent);
+        }
+    }
+
     /**
      * This method creates an implicit intent to open a website
      *
