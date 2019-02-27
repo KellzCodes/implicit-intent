@@ -6,4 +6,5 @@
     <string name="share_text_content">Share Text Content</string>
     <string name="open_location_in_map">Open Location in Map</string>
     <string name="open_website">Open Website</string>
+    <string name="select_contact_phone_number">Select Contact Phone Number</string>
 </resources>

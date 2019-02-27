@@ -54,5 +54,5 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:onClick="onClickSelectContactPhoneNumber"
-        android:text="Select Contact Phone Number"/>
+        android:text="@string/select_contact_phone_number"/>
 </LinearLayout>
