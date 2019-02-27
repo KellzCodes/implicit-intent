@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Environment;
+import android.provider.CalendarContract;
 import android.provider.ContactsContract;
 import android.support.v4.app.ShareCompat;
 import android.support.v4.content.FileProvider;
@@ -16,6 +17,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URL;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import static java.net.Proxy.Type.HTTP;
 
@@ -137,6 +141,41 @@ public class MainActivity extends AppCompatActivity {
          * the device where this code is running might not have an Activity to perform the action
          * with the data we've specified. Without this check, in those cases your app would crash.
          */
+        if (intent.resolveActivity(getPackageManager()) != null){
+            startActivity(intent);
+        }
+    }
+
+    public void onClickAddCalendarEventButton(View view) {
+        String title = "Game of Thrones Premiere";
+        String location = "1100 Avenue Of The Americas " +
+                "New York, New York 10036";
+        String startDate = "APR 14 2019 20:00:00.000 EST";
+        String endDate = "APR 14 2019 22:00:00.000 EST";
+        SimpleDateFormat simpleDateFormat =
+                new SimpleDateFormat("MMM dd yyyy HH:mm:ss.SSS zzz");
+        Date dateStart = null;
+        Date dateEnd = null;
+        try {
+            dateStart = simpleDateFormat.parse(startDate);
+            dateEnd = simpleDateFormat.parse(endDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        long begin = dateStart.getTime();
+        long end = dateEnd.getTime();
+        addEvent(title, location, begin, end);
+    }
+
+    private void addEvent(String title, String location, long begin, long end) {
+        Intent intent = new Intent(Intent.ACTION_INSERT)
+                .setData(CalendarContract.Events.CONTENT_URI)
+                .putExtra(CalendarContract.Events.TITLE, title)
+                .putExtra(CalendarContract.Events.EVENT_LOCATION, location)
+                .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, begin)
+                .putExtra(CalendarContract.EXTRA_EVENT_END_TIME, end);
+
         if (intent.resolveActivity(getPackageManager()) != null){
             startActivity(intent);
         }
