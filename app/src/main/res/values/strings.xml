@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Implicit Intents</string>
+    <string name="add_a_calendar_event">Add a Calendar Event</string>
+    <string name="send_an_email">Send an Email</string>
+    <string name="make_a_call">Make a call</string>
+    <string name="share_text_content">Share Text Content</string>
+    <string name="open_location_in_map">Open Location in Map</string>
+    <string name="open_website">Open Website</string>
 </resources>

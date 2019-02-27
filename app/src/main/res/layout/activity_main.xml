@@ -12,40 +12,40 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:onClick="onClickOpenWebsiteButton"
-        android:text="Open Website"/>
+        android:text="@string/open_website"/>
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:onClick="onClickOpenMapLocationButton"
-        android:text="Open Location in Map"/>
+        android:text="@string/open_location_in_map"/>
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:onClick="onClickShareTextButton"
-        android:text="Share Text Content"/>
+        android:text="@string/share_text_content"/>
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:onClick="onClickMakeCallButton"
-        android:text="Make a call"/>
+        android:text="@string/make_a_call"/>
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:onClick="onClickSendEmailButton"
-        android:text="Send an Email"/>
+        android:text="@string/send_an_email"/>
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:onClick="onClickAddCalendarEventButton"
-        android:text="Add a Calendar Event"/>
+        android:text="@string/add_a_calendar_event"/>
 </LinearLayout>
