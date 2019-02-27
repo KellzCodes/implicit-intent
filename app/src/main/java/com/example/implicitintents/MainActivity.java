@@ -1,11 +1,23 @@
 package com.example.implicitintents;
 
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Environment;
+import android.provider.ContactsContract;
 import android.support.v4.app.ShareCompat;
+import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URL;
+
+import static java.net.Proxy.Type.HTTP;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -42,6 +54,27 @@ public class MainActivity extends AppCompatActivity {
     public void onClickMakeCallButton(View v){
         String phoneNumber = "tel:2296711027";
         makeCall(phoneNumber);
+    }
+
+    public void onClickSendEmailButton(View view) {
+        String[] emails = new String[]{"lshame28@yahoo.com", "lshame28@gmail.com"};
+        String subject = "Implicit Intents are fun";
+        sendEmail(emails, subject);
+    }
+
+    public void sendEmail(String[] emails, String subject) {
+        Intent intent = new Intent(Intent.ACTION_SENDTO);
+        intent.setData(Uri.parse("mailto:"));
+        intent.putExtra(Intent.EXTRA_EMAIL, emails);
+        intent.putExtra(Intent.EXTRA_SUBJECT, subject);
+        intent.putExtra(Intent.EXTRA_TEXT, "Implicit intents do not declare the class name of " +
+                "the component to start, but instead declare an action to perform. The action " +
+                "specifies the thing you want to do, such as view, edit, send, or get something.");
+
+        if(intent.resolveActivity(getPackageManager()) != null){
+            startActivity(intent);
+        }
+
     }
 
     private void makeCall(String phoneNumber) {

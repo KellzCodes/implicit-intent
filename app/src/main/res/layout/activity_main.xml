@@ -34,4 +34,11 @@
         android:layout_weight="1"
         android:onClick="onClickMakeCallButton"
         android:text="Make a call"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:onClick="onClickSendEmailButton"
+        android:text="Send an Email"/>
 </LinearLayout>
