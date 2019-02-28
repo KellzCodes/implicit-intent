@@ -1,29 +1,19 @@
 package com.example.implicitintents;
 
-import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
-import android.os.Environment;
+import android.os.Bundle;
 import android.provider.CalendarContract;
 import android.provider.ContactsContract;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ShareCompat;
-import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.net.URI;
-import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
-import static java.net.Proxy.Type.HTTP;
 
 public class MainActivity extends AppCompatActivity {
     static final int REQUEST_SELECT_PHONE_NUMBER = 1;
@@ -52,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void onClickShareTextButton(View v){
         String text =
-                "Day 33 of #100DaysOfCode: I am playing around with implicit intents " +
+                "Recap of Day 33 of #100DaysOfCode: I played around with implicit intents " +
                         "for #AndroidDev";
 
         shareText(text);
@@ -73,6 +63,14 @@ public class MainActivity extends AppCompatActivity {
         selectContact();
     }
 
+    public void onClickViewContactButton(View view) {
+        Intent intent = new Intent(Intent.ACTION_PICK);
+        intent.setType(ContactsContract.CommonDataKinds.Phone.CONTENT_TYPE);
+        if(intent.resolveActivity(getPackageManager()) != null){
+            startActivityForResult(intent, 2);
+        }
+    }
+
     private void selectContact() {
         Intent intent = new Intent(Intent.ACTION_PICK);
         intent.setType(ContactsContract.CommonDataKinds.Phone.CONTENT_TYPE);
@@ -83,9 +81,9 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        // Get the URI and query the content provider for the phone number
+        Uri contactUri = data.getData();
         if (requestCode == REQUEST_SELECT_PHONE_NUMBER && resultCode == RESULT_OK){
-            // Get the URI and query the content provider for the phone number
-            Uri contactUri = data.getData();
             String[] projection = new String[]{ContactsContract.CommonDataKinds.Phone.NUMBER};
             Cursor cursor = getContentResolver().query(contactUri, projection,
                     null, null, null);
@@ -112,7 +110,6 @@ public class MainActivity extends AppCompatActivity {
         if(intent.resolveActivity(getPackageManager()) != null){
             startActivity(intent);
         }
-
     }
 
     private void makeCall(String phoneNumber) {
@@ -214,5 +211,4 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         }
     }
-
 }
