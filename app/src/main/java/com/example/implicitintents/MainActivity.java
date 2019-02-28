@@ -63,14 +63,6 @@ public class MainActivity extends AppCompatActivity {
         selectContact();
     }
 
-    public void onClickViewContactButton(View view) {
-        Intent intent = new Intent(Intent.ACTION_PICK);
-        intent.setType(ContactsContract.CommonDataKinds.Phone.CONTENT_TYPE);
-        if(intent.resolveActivity(getPackageManager()) != null){
-            startActivityForResult(intent, 2);
-        }
-    }
-
     private void selectContact() {
         Intent intent = new Intent(Intent.ACTION_PICK);
         intent.setType(ContactsContract.CommonDataKinds.Phone.CONTENT_TYPE);
